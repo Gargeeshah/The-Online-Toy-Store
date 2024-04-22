@@ -1,0 +1,27 @@
+# Use the official Python image as the base image
+FROM python:3.9
+
+ARG catalog_PORT
+ARG catalog_csv_file
+
+ENV catalog_PORT=$catalog_PORT
+ENV catalog_csv_file=/Catalog/catalog.csv 
+
+# Set the working directory inside the container
+WORKDIR /
+
+
+# Copy the entire application code into the container at /app
+COPY ./Catalog /Catalog
+
+# Install dotenv module, requests
+RUN pip install python-dotenv
+RUN pip install requests
+# COPY /Users/vaishnavidaber/Documents/spring24-lab2-gargeeshah-vaishnavi0401/src/.env .
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+
+
+# Command to run the application
+ENTRYPOINT ["python3", "-u", "Catalog/catalog.py"]

@@ -1,0 +1,76 @@
+CATALOG Service 
+
+URL:  http://localhost:8821/product/Tux
+{'data': {'name': 'Tux', 'price': 25.99, 'quantity': 947}}
+URL:  http://localhost:8821/product/Fox
+{'data': {'name': 'Fox', 'price': 20.99, 'quantity': 1238}}
+URL:  http://localhost:8821/product/Python
+{'data': {'name': 'Python', 'price': 22.1, 'quantity': 2930}}
+URL:  http://localhost:8821/product/Whale
+{'data': {'name': 'Whale', 'price': 10.89, 'quantity': 1507}}
+URL:  http://localhost:8821/product/Elephant
+{'data': {'name': 'Elephant', 'price': 25.99, 'quantity': 1918}}
+URL:  http://localhost:8821/product/Dolphin
+{'data': {'name': 'Dolphin', 'price': 15.99, 'quantity': 2111}}
+URL:  http://localhost:8821/product/Monkey
+{'error': {'code': 404, 'message': 'Toy not found'}}
+URL:  http://localhost:8821/product/Rabbit
+{'error': {'code': 404, 'message': 'Toy not found'}}
+URL:  http://localhost:8821/product/Cheetah
+{'error': {'code': 404, 'message': 'Toy not found'}}
+URL:  http://localhost:8821/product/
+{'error': {'code': 404, 'message': 'Toy not found'}}
+
+_____________________________________________________________________
+
+ORDER Service
+
+{'name': 'Rabbit', 'quantity': -20}
+{'error': {'code': 400, 'message': 'Sorry Rabbit is out of stock or invalid quantity'}}
+{'name': 'Fox', 'quantity': 100}
+{'data': {'order_number': 4}}
+{'name': 'Dolphin', 'quantity': -2}
+{'error': {'code': 400, 'message': 'Sorry Dolphin is out of stock or invalid quantity'}}
+{'name': 'Python', 'quantity': 50}
+{'data': {'order_number': 5}}
+{'name': 'Tux', 'quantity': 1000}
+{'error': {'code': 400, 'message': 'Sorry Tux is out of stock or invalid quantity'}}
+{'name': 'Whale', 'quantity': 0}
+{'error': {'code': 400, 'message': 'Sorry Whale is out of stock or invalid quantity'}}
+{'name': 'Monkey', 'quantity': 22}
+{'error': {'code': 400, 'message': 'Sorry Monkey is out of stock or invalid quantity'}}
+{'name': 'Elephant', 'quantity': 22.3}
+{'error': {'code': 400, 'message': 'Sorry Elephant is out of stock or invalid quantity'}}
+{'error': {'code': 404, 'message': 'Product not found'}}
+_______________________________________________________________________
+
+ENTIRE APPLICATION
+
+GET: URL:  http://localhost:8007/product/Rabbit
+{'error': {'code': 404, 'message': 'Product not found'}}
+POST request:  {'name': 'Rabbit', 'quantity': -20}
+{'error': {'code': 400, 'message': 'Sorry Rabbit is out of stock or invalid quantity'}}
+GET: URL:  http://localhost:8007/product/Fox
+{'data': {'name': 'Fox', 'price': 20.99, 'quantity': 38}}
+POST request:  {'name': 'Fox', 'quantity': 100}
+{'error': {'code': 400, 'message': 'Sorry Fox is out of stock or invalid quantity'}}
+GET: URL:  http://localhost:8007/product/Dolphin
+{'data': {'name': 'Dolphin', 'price': 15.99, 'quantity': 2111}}
+POST request:  {'name': 'Dolphin', 'quantity': -2}
+{'error': {'code': 400, 'message': 'Sorry Dolphin is out of stock or invalid quantity'}}
+GET: URL:  http://localhost:8007/product/Python
+{'data': {'name': 'Python', 'price': 22.1, 'quantity': 2330}}
+POST request:  {'name': 'Python', 'quantity': 50}
+{'data': {'order_number': 1}}
+GET: URL:  http://localhost:8007/product/Tux
+{'data': {'name': 'Tux', 'price': 25.99, 'quantity': 946}}
+POST request:  {'name': 'Tux', 'quantity': 1000}
+{'error': {'code': 400, 'message': 'Sorry Tux is out of stock or invalid quantity'}}
+GET: URL:  http://localhost:8007/product/Whale
+{'data': {'name': 'Whale', 'price': 10.89, 'quantity': 1497}}
+POST request:  {'name': 'Whale', 'quantity': 0}
+{'error': {'code': 400, 'message': 'Sorry Whale is out of stock or invalid quantity'}}
+GET: URL:  http://localhost:8007/product/Monkey
+{'error': {'code': 404, 'message': 'Product not found'}}
+POST request:  {'name': 'Monkey', 'quantity': 22}
+{'error': {'code': 404, 'message': 'Sorry Monkey is not found.'}}

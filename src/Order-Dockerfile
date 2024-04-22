@@ -1,0 +1,34 @@
+# Use the official Python image as the base image
+FROM python:3.9
+
+ARG order_csv_file
+ARG order_host
+ARG order_PORT
+ARG catalog_host
+ARG catalog_PORT
+
+ENV order_csv_file=/Order/order.csv
+ENV order_host=$order_host
+ENV order_PORT=$order_PORT
+ENV catalog_host=$catalog_host
+ENV catalog_PORT=$catalog_PORT
+
+# Set the working directory inside the container
+WORKDIR /
+
+
+# Copy the entire application code into the container at /app
+COPY ./Order /Order
+
+# Install dotenv module, requests
+RUN pip install python-dotenv
+RUN pip install requests
+
+# COPY /Users/vaishnavidaber/Documents/spring24-lab2-gargeeshah-vaishnavi0401/src/.env .
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+
+
+# Command to run the application
+ENTRYPOINT ["python3", "-u", "Order/order.py"]

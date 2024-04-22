@@ -1,0 +1,36 @@
+# Use the official Python image as the base image
+FROM python:3.9
+
+ARG frontend_port
+ARG order_host
+ARG order_PORT
+ARG catalog_host
+ARG catalog_PORT
+
+ENV frontend_port=$frontend_port
+ENV order_host=$order_host
+ENV order_PORT=$order_PORT
+ENV catalog_host=$catalog_host
+ENV catalog_PORT=$catalog_PORT
+
+# Set the working directory inside the container
+WORKDIR /
+
+
+# Copy the entire application code into the container at /app
+COPY ./Frontend-Service /Frontend-Service
+
+# Install dotenv module, requests
+RUN pip install python-dotenv
+RUN pip install requests
+
+# COPY /Users/vaishnavidaber/Documents/spring24-lab2-gargeeshah-vaishnavi0401/src/.env .
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+
+# Expose the port the application runs on
+# EXPOSE 8007
+
+# Command to run the application
+ENTRYPOINT ["python3", "-u", "Frontend-Service/frontend-service.py"]
