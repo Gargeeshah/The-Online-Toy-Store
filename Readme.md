@@ -21,3 +21,5 @@ The interfaces used between the microservices. Each microservice handle requests
 Added some variety to the toy offering by initializing your catalog with at least 10 different toys. Each toy should have an initial volume of 100.
 
 The client first queries the front-end service with a random stock, then it will make a follow-up order request with probability p (make p an adjustable variable). I decide whether the toy query request and an order request use the same connection. The client will repeat the aforementioned steps for a number of iterations, and record the order number and order information if an order request was successful. Before exiting, the client will retrieve the order information of each order that was made using the order query request, and check whether the server reply matches the locally stored order information.
+
+Please refer Design docs for more insights on implementation detail.
