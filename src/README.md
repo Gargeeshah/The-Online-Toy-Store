@@ -120,3 +120,70 @@ Grant the permission and run the `build.sh` file
 ```
  docker compose down
 ```
+
+# How to start the replication without using Docker on Local
+
+## Check the .env files for any changes 
+
+## In the src folder, use the run-all.sh script to execute all the services 
+```
+chmod +x run-all.sh
+```
+
+```
+./run-all.sh
+```
+
+# How to start the services for replicas on AWS
+
+### Change the environment variables in .env if necessary.
+
+1.  First we created an `t2.micro` EC2 instance in the `us-east-1` region on AWS 
+```shell
+$ aws ec2 run-instances --image-id ami-0d73480446600f555 --instance-type t2.micro --key-name vockey > instance.json
+```
+
+2.   Checking status of our instance to find the public DNS name
+```shell
+aws ec2 describe-instances --instance-id ec2-44-223-61-2.compute-1.amazonaws.com
+```
+
+3.  Access the instance via ssh
+```shell
+chmod 400 labuser.pem
+#for our frontend service, which uses port=477
+aws ec2 authorize-security-group-ingress --group-name default --protocol tcp --port 4773 --cidr 0.0.0.0/0
+ssh -i labsuser.pem ubuntu@ec2-44-223-61-2.compute-1.amazonaws.com
+```
+
+4. Inside the instance, install the required packages:
+```shell
+sudo apt-get install software-properties-common
+sudo apt-add-repository universe
+sudo apt-get update
+sudo apt-get install python3-pip
+pip3 install requests
+pip3 install python-dotenv
+pip3 install pandas
+```
+
+5. Cloning our repo on the instance
+```shell
+Git clone https://github.com/umass-cs677-current/spring24-lab3-Gargeeshah-vaishnavi0401.git
+cd /spring24-lab3-Gargeeshah-vaishnavi0401/src 
+```
+
+6. Running all the five services
+```shell
+chmod +x run-all.sh
+./run-all.sh 
+```
+
+7. Run concurrent clients locally
+```shell
+cd ${LAB3_PATH}/src/test/load_test
+```
+```shell
+chmod +x client5.sh
+./client5.sh 
+```
